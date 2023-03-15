@@ -1,16 +1,5 @@
 export NS=intel-system
 export CA_SIGNER_NAME=sgx-signer
-cat << EOF | kubectl create -f -
-apiVersion: tcs.intel.com/v1alpha1
-kind: TCSClusterIssuer
-metadata:
-    name: $CA_SIGNER_NAME
-spec:
-    secretName: ${CA_SIGNER_NAME}-secret
-EOF
-
-sleep 3
-
 export CA_SIGNER=tcsclusterissuer.tcs.intel.com/sgx-signer
 cat << EOF > istio-custom-ca.yaml
 apiVersion: install.istio.io/v1alpha1
